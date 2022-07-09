@@ -7,6 +7,7 @@ class Ppdb extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+        $this->load->model('Jamaah_model');
     }
 
     public function index()
@@ -19,143 +20,23 @@ class Ppdb extends CI_Controller
         $data['menu'] = 'home';
         $data['web'] =  $this->db->get('website')->row_array();
         $data['home'] =  $this->db->get('home')->row_array();
-        $this->db->order_by('nama', 'asc');
-        $data['prov'] = $this->db->get('provinsi')->result_array();
+        $data['jamaah']=$this->Jamaah_model->getAllJamaah()->result_array();
 
 
-        $this->form_validation->set_rules('nik', 'NIK', 'required|is_unique[ppdb.nik]', [
-            'is_unique' => 'Nik ini sudah terdaftar!',
-            'required' => 'Nik tidak boleh kosong!'
-        ]);
-        $this->form_validation->set_rules('nis', 'NIS', 'required|is_unique[ppdb.nis]', [
-            'is_unique' => 'Nis ini sudah terdaftar!',
-            'required' => 'Nis tidak boleh kosong!'
-        ]);
-        $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[ppdb.email]', [
-            'is_unique' => 'Email ini sudah terdaftar!',
-            'required' => 'Email tidak boleh kosong!'
-        ]);
-        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[3]', [
-            'min_length' => 'Password terlalu pendek!',
-            'required' => 'Password tidak boleh kosong!'
-        ]);
-        $this->form_validation->set_rules('no_hp', 'Nomor Hp', 'required');
-        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
-        $this->form_validation->set_rules('ttl', 'Tanggal Lahir', 'required');
-        $this->form_validation->set_rules('prov', 'Provinsi', 'required');
-        $this->form_validation->set_rules('kab', 'Kota', 'required');
+        $this->form_validation->set_rules('nama', 'Nama Jamaah', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('nama_ayah', 'Nama Ayah', 'required');
-        $this->form_validation->set_rules('nama_ibu', 'Nama ibu', 'required');
-        $this->form_validation->set_rules('pek_ayah', 'Pekerjaan Ayah', 'required');
-        $this->form_validation->set_rules('pek_ibu', 'Pekerjaan Ibu', 'required');
-        $this->form_validation->set_rules('no_telp', 'Nomor Telepon', 'required');
-        $this->form_validation->set_rules('thn_msk', 'Tahun Masuk', 'required');
-        $this->form_validation->set_rules('sekolah_asal', 'Sekolah Asal', 'required');
-        $this->form_validation->set_rules('kelas', 'Kelas', 'required');
-        $this->form_validation->set_rules('diniyah', 'Diniyah', 'required');
+        $this->form_validation->set_rules('blok', 'Blok', 'required');
+        $this->form_validation->set_rules('no', 'Nomor', 'required');
+        $this->form_validation->set_rules('status', 'Status');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('frontend/header', $data);
             $this->load->view('frontend/ppdb/ppdb', $data);
             $this->load->view('frontend/footer', $data);
         } else {
-
-            $tgl = date('Y-m-d');
-            $nama = $this->input->post('nama');
-            $email = $this->input->post('email');
-            $id_prov = $this->input->post('prov');
-
-            $provinsi =  $data['prov'] = $this->db->get_where('provinsi', ['id_prov' => $id_prov])->row_array();
-
-            //Buat ID DAFTAR
-            $query = $this->db->order_by('id', 'DESC')->limit(1)->get('ppdb');
-            if ($query->num_rows() !== 0) {
-                $data1 = $query->row_array();
-                $nodaftar = $data1['id'] + 1;
-            } else {
-                $nodaftar = 1;
-            }
-            $nodaftarmax = str_pad($nodaftar, 5, "0", STR_PAD_LEFT);
-            $nodaftarjadi = 'SAN' . $nodaftarmax;
-
-            //GAMBAR
-            $config['upload_path'] = './assets/img/data/';
-            $config['allowed_types'] = 'jpg|png|jpeg';
-            $config['max_size']  = '8048';
-            $config['remove_space'] = TRUE;
-
-            $this->load->library('upload', $config);
-
-            if ($this->upload->do_upload('img_siswa')) {
-                $img_siswa  = $this->upload->data('file_name');
-            } else {
-                $img_siswa  = '';
-            }
-            if ($this->upload->do_upload('img_kk')) {
-                $img_kk  = $this->upload->data('file_name');
-            } else {
-                $img_kk  = '';
-            }
-            if ($this->upload->do_upload('img_ijazah')) {
-                $img_ijazah  = $this->upload->data('file_name');
-            } else {
-                $img_ijazah  = '';
-            }
-            if ($this->upload->do_upload('img_ktp')) {
-                $img_ktp  = $this->upload->data('file_name');
-            } else {
-                $img_ktp  = '';
-            }
-            $data = [
-                'no_daftar' => $nodaftarjadi,
-                'nik' => $this->input->post('nik'),
-                'nis' => $this->input->post('nis'),
-                'nama' => $nama,
-                'email' => $email,
-                'no_hp' => $this->input->post('no_hp'),
-                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                'jk' => $this->input->post('jk'),
-                'ttl' => $this->input->post('ttl'),
-                'prov' => $provinsi['nama'],
-                'kab' => $this->input->post('kab'),
-                'alamat' => $this->input->post('alamat'),
-                'nama_ayah' => $this->input->post('nama_ayah'),
-                'nama_ibu' => $this->input->post('nama_ibu'),
-                'pek_ayah' => $this->input->post('pek_ayah'),
-                'pek_ibu' => $this->input->post('pek_ibu'),
-                'nama_wali' => $this->input->post('nama_wali'),
-                'pek_wali' => $this->input->post('pek_wali'),
-                'peng_ortu' => $this->input->post('peng_ortu'),
-                'no_telp' => $this->input->post('no_telp'),
-                'thn_msk' => $this->input->post('thn_msk'),
-                'sekolah_asal' => $this->input->post('sekolah_asal'),
-                'kelas' => $this->input->post('kelas'),
-                'diniyah' => $this->input->post('diniyah'),
-                'img_siswa' => $img_siswa,
-                'img_kk' => $img_kk,
-                'img_ijazah' => $img_ijazah,
-                'img_ktp' => $img_ktp,
-                'date_created' => $tgl,
-                'status' => '0'
-            ];
-
-            $this->db->insert('ppdb', $data);
-
-            $sess = [
-                'email' => $email,
-                'nik' => $this->input->post('nik')
-            ];
-            $this->session->set_userdata($sess);
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Data pendaftaran kamu berhasil dikirim!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                </div>');
-            redirect('ppdb/dashboard');
+            $this->Jamaah_model->tambahdata($data);
+			$this->session->set_flashdata('flash', 'Ditambahkan');
+            redirect('ppdb');
         }
     }
 

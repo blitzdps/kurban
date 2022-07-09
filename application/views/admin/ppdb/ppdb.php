@@ -16,37 +16,27 @@
                         <table class="table table-hover display" id="mytable" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nama Lengkap</th>
-                                    <th scope="col">NIK</th>
-                                    <th scope="col">NIS</th>
-                                    <th scope="col">Alamat</th>
-                                    <th scope="col">Tanggal Lahir</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Jamaah</th>
+                                <th scope="col">Alamat</th>
+                                <th scope="col">Blok</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Status Kurban</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $i = 1;
                                 foreach ($siswa as $d) : ?>
-                                    <?php
-                                    $ttl = $d['ttl'];
-                                    $lahir    = new DateTime($ttl);
-                                    $today        = new DateTime();
-                                    $diff = $today->diff($lahir);
-                                    ?>
+                                    
                                     <tr>
                                         <th scope="row"><?= $i ?></th>
                                         <td width="180"><?= $d['nama'] ?></td>
                                         <td width="150"><?= $d['nik'] ?></td>
                                         <td width="100"><?= $d['nis'] ?></td>
                                         <td width="310"><?= $d['alamat'] ?></td>
-                                        <td><?= mediumdate_indo(date($ttl)) ?>
-                                            <span class="badge badge-info">
-                                                <font size="1.5px"> <?php echo 'Umur ' . $diff->y . ' Tahun';  ?></font>
-                                            </span>
-                                        </td>
                                         <td>
                                             <?php if ($d['status']  == '0') : ?>
                                     <span class="badge badge-warning badge-pill disabled" aria-disabled="true">Pending</span>

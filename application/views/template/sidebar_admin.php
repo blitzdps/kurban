@@ -33,8 +33,25 @@ $notif_kontak = $this->db->get_where('kontak', ['status' => 1])->num_rows();
         Menu Madrasah
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <?php if ($menu == 'menu-1') : ?>
+        <?php if ($menu == 'menu-1') : ?>
+        <li class="nav-item active">
+        <?php else : ?>
+        <li class="nav-item">
+        <?php endif; ?>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Jamaah</span>
+        </a>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Pilih menu:</h6>
+                <a class="collapse-item" href="<?= base_url('admin/jamaah'); ?>">Data jamaah</a>
+                <a class="collapse-item" href="<?= base_url('admin/tambah_jamaah'); ?>">Pendaftaran jamaah</a>
+            </div>
+        </div>
+        </li>
+
+        <!-- <?php if ($menu == 'menu-1') : ?>
         <li class="nav-item active">
         <?php else : ?>
         <li class="nav-item">
@@ -50,9 +67,9 @@ $notif_kontak = $this->db->get_where('kontak', ['status' => 1])->num_rows();
                 <a class="collapse-item" href="<?= base_url('admin/tambah_siswa'); ?>">Pendaftaran siswa</a>
             </div>
         </div>
-        </li>
+        </li> -->
 
-        <?php if ($menu == 'ppdb') : ?>
+        <!-- <?php if ($menu == 'ppdb') : ?>
             <li class="nav-item active">
             <?php else : ?>
             <li class="nav-item">
@@ -64,7 +81,44 @@ $notif_kontak = $this->db->get_where('kontak', ['status' => 1])->num_rows();
                     <span class="badge badge-danger" style="font-size: 10px;"><?= $notif_ppdb ?></span>
                 <?php endif ?>
             </a>
-            </li>
+            </li> -->
+
+        <?php if ($menu == 'menu-9') : ?>
+                <li class="nav-item active">
+                <?php else : ?>
+                <li class="nav-item">
+                <?php endif; ?>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwoss" aria-expanded="true" aria-controls="collapseTwoss">
+                    <i class="fas fa-fw fa-user-circle"></i>
+                    <span>Masjid</span>
+                </a>
+                <div id="collapseTwoss" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Pilih menu:</h6>
+                        <a class="collapse-item" href="<?= base_url('admin/masjid'); ?>">Data Masjid</a>
+                        <a class="collapse-item" href="<?= base_url('admin/tambah_masjid'); ?>">Tambah Masjid</a>
+                    </div>
+                </div>
+                </li>
+
+                <?php if ($menu == 'menu-9') : ?>
+                <li class="nav-item active">
+                <?php else : ?>
+                <li class="nav-item">
+                <?php endif; ?>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fas fa-fw fa-user-circle"></i>
+                    <span>karyawan</span>
+                </a>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Pilih menu:</h6>
+                        <a class="collapse-item" href="<?= base_url('admin/karyawan'); ?>">Data Karyawan</a>
+                        <a class="collapse-item" href="<?= base_url('admin/tambah_karyawan'); ?>">Tambah Karyawan</a>
+                    </div>
+                </div>
+                </li>
+
                                 <!-- Divider -->
                                 <hr class="sidebar-divider">
 

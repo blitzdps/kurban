@@ -11,7 +11,7 @@ class Export_model extends CI_Model
 
     function getAll()
     {
-        $this->db->from('siswa'); //nama tabel harap disesuaikan dengan nama tabel milik sobat
+        $this->db->from('tbl_jamaah'); //nama tabel harap disesuaikan dengan nama tabel milik sobat
 
         return $this->db->get();
     }

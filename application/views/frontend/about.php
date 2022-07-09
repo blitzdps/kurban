@@ -38,9 +38,9 @@
 
                         <h2 class="entry-title pt-5"><a href="#">Visi dan Misi</a></h2>
 
-                        <h3>Visi Madrasah</h3>
+                        <h3>Visi Tim Flobamora Technology</h3>
                         <p><?= $about['visi'] ?></p>
-                        <h3>Misi Madrasah</h3>
+                        <h3>Misi Tim Flobamora Technology</h3>
                         <p><?= $about['misi'] ?></p>
                     </div>
                 </article><!-- End blog entry -->

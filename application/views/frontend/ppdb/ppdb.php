@@ -55,7 +55,7 @@
                             
                                 <div class="form-group">
                                     <label>Alamat</label>
-                                    <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="<?= set_value('alamat') ?>">
+                                    <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="Perumahan Anugerah Sejahtera 3">
                                     <?= form_error('alamat', '<small class="text-danger pl-3">', ' </small>') ?>
                                 </div>
 

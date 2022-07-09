@@ -14,7 +14,7 @@ class Home extends CI_Controller
         $data['web'] =  $this->db->get('website')->row_array();
         $data['home'] =  $this->db->get('home')->row_array();
         $data['tagline'] =  $this->db->get('tagline')->result_array();
-        $data['sum_siswa'] = $this->db->get("siswa")->num_rows();
+        $data['sum_siswa'] = $this->db->get("tbl_jamaah")->num_rows();
         $data['sum_karyawan'] = $this->db->get("karyawan")->num_rows();
         $data['sum_pendidikan'] = $this->db->get("data_pendidikan")->num_rows();
         $data['sum_kelas'] = $this->db->get("data_kelas")->num_rows();

@@ -56,7 +56,7 @@
   </section><!-- End About Section -->
 
   <!-- ======= Values Section ======= -->
-  <section id="values" class="values">
+  <!-- <section id="values" class="values">
 
     <div class="container" data-aos="fade-up">
 
@@ -83,7 +83,8 @@
 
     </div>
 
-  </section><!-- End Values Section -->
+  </section> -->
+  <!-- End Values Section -->
 
   <!-- ======= Counts Section ======= -->
   <section id="counts" class="counts">
@@ -96,12 +97,12 @@
             <i class="bi bi-people" style="color: #bb0852;"></i>
             <div>
               <span data-purecounter-start="0" data-purecounter-end="<?= $sum_siswa ?>" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Total siswa</p>
+              <p>Total Jamaah</p>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-3 col-md-6">
+        <!-- <div class="col-lg-3 col-md-6">
           <div class="count-box">
             <i class="bi bi-person-circle"></i>
             <div>
@@ -129,7 +130,7 @@
               <p>Kelas</p>
             </div>
           </div>
-        </div>
+        </div> -->
 
       </div>
 
@@ -137,7 +138,7 @@
   </section><!-- End Counts Section -->
 
   <!-- ======= Features Section ======= -->
-  <section id="features" class="features">
+  <!-- <section id="features" class="features">
 
     <div class="container" data-aos="fade-up">
 
@@ -204,7 +205,8 @@
 
     </div>
 
-  </section><!-- End Features Section -->
+  </section> -->
+  <!-- End Features Section -->
 
   <!-- ======= Portfolio Section ======= -->
   <section id="portfolio" class="portfolio">
